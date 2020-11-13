@@ -1,8 +1,11 @@
-import 'package:translate_ref_generator/translate_ref_generator.dart';
+import 'package:translate_ref_generator/builder.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('calculate', () {
-    expect(calculate(), 42);
+  test('should use *.lang.en build extensions', () {
+    final builder = TranslationReferenceBuilder();
+    expect(builder.buildExtensions, {
+      '.lang.json': ['.gr.dart'],
+    });
   });
 }
