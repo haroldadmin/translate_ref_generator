@@ -1,10 +1,18 @@
 import 'package:file/file.dart';
 import 'package:file/memory.dart';
 import 'package:test/test.dart';
-import 'package:translate_ref_generator/file_discoverer.dart';
+import 'package:translate_ref_generator/src/file_discoverer.dart';
 
 void main() async {
-  group('LangFileDiscoverer', () {
+  group('LangFileDiscoverer.listFiles', () {
+    test('should return empty list for non-existent dir', () async {
+      final fs = MemoryFileSystem.test();
+      final discoverer = LangFileDiscoverer(fileSystem: fs, dir: 'lang');
+
+      final files = await discoverer.listFiles();
+      expect(files.isEmpty, true);
+    });
+
     test('should list all matching files', () async {
       final fileNames = const ['en.lang.json', 'hi.lang.json'];
       final fs = MemoryFileSystem.test();
@@ -85,6 +93,16 @@ void main() async {
 
       final names = discoveredFiles.map((f) => f.basename).toList();
       expect(names, isNot(contains('linked.lang.json')));
+    });
+  });
+
+  group('LangFileDiscoverer.discoverPaths', () {
+    test('should return empty list for non-existent dir', () async {
+      final fs = MemoryFileSystem.test();
+      final discoverer = LangFileDiscoverer(fileSystem: fs, dir: 'lang');
+
+      final paths = await discoverer.discoverPaths();
+      expect(paths.isEmpty, true);
     });
   });
 }

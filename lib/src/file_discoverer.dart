@@ -3,24 +3,18 @@ import 'package:file/local.dart';
 import 'package:path/path.dart' as path;
 
 const _LangExtensions = ['.lang.json'];
-const _DefaultDir = 'lib/lang/';
 
-/// Finds language translation files in the project.
-///
-/// Example:
-/// ```dart
-/// final discoverer = LangFileDiscoverer(dir: 'lib/lang/');
-/// final langFiles = await discoverer.listFiles();
-/// ```
+/// Traverses [dir] in the given [fileSystem] to find files
+/// that match supported language file extensions.
 class LangFileDiscoverer {
   final FileSystem fileSystem;
   final String dir;
   final bool isRecursive;
 
-  LangFileDiscoverer({
+  const LangFileDiscoverer({
     this.fileSystem = const LocalFileSystem(),
-    this.dir = _DefaultDir,
     this.isRecursive = false,
+    this.dir,
   });
 
   Future<List<File>> listFiles() async {
@@ -39,6 +33,15 @@ class LangFileDiscoverer {
         .map((fsEntity) => fileSystem.file(fsEntity.path))
         .toList();
 
-    return fileList;
+    return List<File>.unmodifiable(fileList);
+  }
+
+  Future<List<String>> discoverPaths() async {
+    if (!(await fileSystem.isDirectory(dir))) {
+      return List<String>.empty();
+    }
+
+    final files = await listFiles();
+    return files.map((file) => file.path).toList();
   }
 }
