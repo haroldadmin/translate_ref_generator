@@ -1,9 +1,9 @@
 builders:
-  translation_reference_builder:
+  translate_ref_generator:
     import: 'package:translate_ref_generator/translate_ref_generator.dart'
-    builder_factory: 'translationReferenceBuilder'
+    builder_factories: ['translationReferenceBuilder']
     build_extensions:
       .lang.json:
-        - .gr.dart
+        - .lang.dart
     build_to: source
     auto_apply: dependents

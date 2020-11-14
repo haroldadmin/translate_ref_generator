@@ -1,19 +1,17 @@
 import 'dart:async';
-import 'dart:developer' as dev;
 
+import 'package:path/path.dart' as path;
+import 'package:glob/glob.dart';
 import 'package:build/build.dart';
 
-const _TAG = 'TranslationReferenceBuilder';
-
 class TranslationReferenceBuilder extends Builder {
+  final _glob = Glob('*.lang.json');
+
   @override
-  FutureOr<void> build(BuildStep buildStep) {
-    final langFile = buildStep.inputId.path;
-    dev.log('Processing $langFile', name: _TAG);
-  }
+  FutureOr<void> build(BuildStep buildStep) async {}
 
   @override
   Map<String, List<String>> get buildExtensions => const {
-        '.lang.json': ['.gr.dart'],
+        r'$package$': ['lib/translation_references.lang.dart'],
       };
 }
