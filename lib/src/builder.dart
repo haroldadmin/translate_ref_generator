@@ -4,10 +4,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:translate_ref_generator/src/annotations.dart';
-import 'package:translate_ref_generator/src/file_reader.dart';
-import 'package:translate_ref_generator/src/file_discoverer.dart';
-import 'package:translate_ref_generator/src/extensions.dart';
-import 'package:translate_ref_generator/src/translations_merger.dart';
+import 'package:translate_ref_generator/src/file_generator.dart';
 
 /// Generates a Dart file that contains static properties representing
 /// keys in JSON translation files.
@@ -18,10 +15,9 @@ import 'package:translate_ref_generator/src/translations_merger.dart';
 /// translated strings across multiple files depending on the user locale.
 class TranslationReferenceGenerator
     extends GeneratorForAnnotation<TranslationReferences> {
-  final LangFileDiscoverer _discoverer;
+  final ReferenceFileGenerator _generator;
 
-  TranslationReferenceGenerator(String dir)
-      : _discoverer = LangFileDiscoverer(dir: dir);
+  TranslationReferenceGenerator(this._generator);
 
   @override
   Future<String> generateForAnnotatedElement(
@@ -42,40 +38,6 @@ class TranslationReferenceGenerator
       );
     }
 
-    final className = element.displayName.substring(1);
-    final translationRefs = await generateRefKeys(buildStep);
-
-    final buffer = StringBuffer();
-    final staticConstants = translationRefs
-        .map((ref) => 'static const String $ref = \'$ref\';')
-        .join('\n');
-
-    buffer
-      ..writeln('class $className {')
-      ..writeln(staticConstants)
-      ..writeln('}');
-
-    return buffer.toString();
-  }
-
-  Future<Set<String>> generateRefKeys(BuildStep buildStep) async {
-    final langFilePaths = await _discoverer.discoverPaths();
-    print('Discovered paths: $langFilePaths');
-
-    final translations = await Stream.fromIterable(langFilePaths)
-        .map((p) => AssetId(buildStep.inputId.package, p))
-        .asyncWhere((assetId) async {
-          final canRead = await buildStep.canRead(assetId);
-          if (!canRead) {
-            print('Can not read ${assetId.toString()}');
-          }
-          return canRead;
-        })
-        .asyncMap((assetId) => LangFileReader.readAsset(assetId, buildStep))
-        .toList();
-
-    final mergedSet = LangFilesMerger.merge(translations);
-
-    return mergedSet;
+    return _generator.generate(element, buildStep);
   }
 }

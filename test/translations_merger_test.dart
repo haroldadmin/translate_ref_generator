@@ -11,7 +11,7 @@ void main() {
         _es,
       ].map((json) => LangFileReader.parse(json)).toList();
 
-      final mergedSet = LangFilesMerger.merge(translations);
+      final mergedSet = TranslationsMerger.mergeMaps(translations);
 
       expect(mergedSet, hasLength(1));
       expect(mergedSet.first, 'greeting');
@@ -26,7 +26,7 @@ void main() {
       _fr,
     ].map((json) => LangFileReader.parse(json)).toList();
 
-    final mergedSet = LangFilesMerger.merge(translations);
+    final mergedSet = TranslationsMerger.mergeMaps(translations);
 
     expect(mergedSet, hasLength(2));
     expect(mergedSet, containsAll(['greeting', 'goodbye']));
@@ -34,7 +34,7 @@ void main() {
 
   test('should return empty set when input is empty', () {
     final translations = List<Map<String, dynamic>>.empty();
-    final mergedSet = LangFilesMerger.merge(translations);
+    final mergedSet = TranslationsMerger.mergeMaps(translations);
 
     expect(mergedSet, isEmpty);
   });
