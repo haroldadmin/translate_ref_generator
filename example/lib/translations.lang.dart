@@ -5,6 +5,5 @@
 // **************************************************************************
 
 class TranslationsExample {
-  static const String name = 'name';
-  static const String project = 'project';
+  static const String greeting = 'greeting';
 }
