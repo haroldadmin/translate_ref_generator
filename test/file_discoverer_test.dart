@@ -1,7 +1,8 @@
-import 'package:file/file.dart';
 import 'package:file/memory.dart';
 import 'package:test/test.dart';
 import 'package:translate_ref_generator/src/file_discoverer.dart';
+
+import 'utilities.dart';
 
 void main() async {
   group('LangFileDiscoverer.listFiles', () {
@@ -105,14 +106,4 @@ void main() async {
       expect(paths.isEmpty, true);
     });
   });
-}
-
-Future<List<File>> createFiles(List<String> fileNames, FileSystem fs) async {
-  return Stream.fromIterable(fileNames)
-      .asyncMap((fileName) => createFile(fileName, fs))
-      .toList();
-}
-
-Future<File> createFile(String fileName, FileSystem fs) {
-  return fs.file(fileName).create(recursive: true);
 }

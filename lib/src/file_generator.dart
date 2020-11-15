@@ -21,6 +21,14 @@ class ReferenceFileGenerator {
     log.info('Discovered lang files: $langFiles');
 
     final translations = await _readTranslationsInFiles(langFiles, buildStep);
+
+    return createSourceString(className, translations);
+  }
+
+  Future<String> createSourceString(
+    String className,
+    List<Translation> translations,
+  ) async {
     final mergedSet = TranslationsMerger.merge(translations);
 
     translations.forEach((translation) {

@@ -2,13 +2,15 @@ import 'package:test/test.dart';
 import 'package:translate_ref_generator/src/file_reader.dart';
 import 'package:translate_ref_generator/src/translations_merger.dart';
 
+import 'utilities.dart';
+
 void main() {
   group('LangFilesMerger', () {
     test('should merge keys of all input files', () {
       final translations = [
-        _en,
-        _hi,
-        _es,
+        mockEn,
+        mockHi,
+        mockEs,
       ].map((json) => LangFileReader.parse(json)).toList();
 
       final mergedSet = TranslationsMerger.mergeMaps(translations);
@@ -20,10 +22,10 @@ void main() {
 
   test('should merge keys not present in all files too', () {
     final translations = [
-      _en,
-      _hi,
-      _es,
-      _fr,
+      mockEn,
+      mockHi,
+      mockEs,
+      mockFr,
     ].map((json) => LangFileReader.parse(json)).toList();
 
     final mergedSet = TranslationsMerger.mergeMaps(translations);
@@ -39,28 +41,3 @@ void main() {
     expect(mergedSet, isEmpty);
   });
 }
-
-const _en = '''
-{
-  "greeting": "Hello"
-}
-''';
-
-const _hi = '''
-{
-  "greeting": "नमस्कार"
-}
-''';
-
-const _es = '''
-{
-  "greeting": "Hola"
-}
-''';
-
-const _fr = '''
-{
-  "greeting": "Bonjour",
-  "goodbye": "Au revoir"
-}
-''';
