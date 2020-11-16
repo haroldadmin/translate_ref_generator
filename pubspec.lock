@@ -473,9 +473,11 @@ packages:
   translate_ref:
     dependency: "direct main"
     description:
-      path: "../translate_ref"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "60129897c14256203a4c8d63edfb867ec88e91cd"
+      url: "https://github.com/haroldadmin/translate_ref"
+    source: git
     version: "0.0.2"
   typed_data:
     dependency: transitive
