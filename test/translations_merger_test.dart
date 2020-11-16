@@ -11,7 +11,7 @@ void main() {
         mockEn,
         mockHi,
         mockEs,
-      ].map((json) => LangFileReader.parse(json)).toList();
+      ].map((json) => LangFileReader.parse('mock-file', json)).toList();
 
       final mergedSet = TranslationsMerger.mergeMaps(translations);
 
@@ -26,7 +26,7 @@ void main() {
       mockHi,
       mockEs,
       mockFr,
-    ].map((json) => LangFileReader.parse(json)).toList();
+    ].map((json) => LangFileReader.parse('mock-file', json)).toList();
 
     final mergedSet = TranslationsMerger.mergeMaps(translations);
 
