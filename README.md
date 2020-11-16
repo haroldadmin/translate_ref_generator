@@ -75,7 +75,3 @@ This package is not yet published to `pub.dev`. No guarantees are made regarding
 
 Found a bug or have a feature request? Open an issue!
 Want to contribute new features or bug fixes? Open an issue and the create a Pull Request.
-
-## License
-
-`<TBD>`
