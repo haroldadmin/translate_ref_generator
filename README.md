@@ -16,10 +16,16 @@ Add `translate_ref` as a dependency, and `translate_ref_generator` as a dev depe
 
 ```yaml
 dependencies:
-  translate_ref: ^0.0.2
+  translate_ref:
+    git:
+      url: https://github.com/haroldadmin/translate_ref
+      ref: 0.0.2
 
 dev_dependencies:
-  translate_ref_generator: ^0.0.2
+  translate_ref_generator:
+    git:
+      url: https://github.com/haroldadmin/translate_ref_generator
+      ref: 0.0.2
 ```
 
 ## Usage
