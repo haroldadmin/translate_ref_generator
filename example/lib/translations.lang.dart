@@ -6,4 +6,5 @@
 
 class TranslationsExample {
   static const String greeting = 'greeting';
+  static const String farewell = 'farewell';
 }

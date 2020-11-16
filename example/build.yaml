@@ -1,6 +1,0 @@
-targets:
-  $default:
-    builders:
-      translate_ref_generator:
-        options:
-          translationsDir: 'lib/lang/'

@@ -4,6 +4,8 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:translate_ref_generator/src/annotations.dart';
+import 'package:translate_ref_generator/src/config.dart';
+import 'package:translate_ref_generator/src/file_discoverer.dart';
 import 'package:translate_ref_generator/src/file_generator.dart';
 
 /// Generates a Dart file that contains static properties representing
@@ -15,9 +17,7 @@ import 'package:translate_ref_generator/src/file_generator.dart';
 /// translated strings across multiple files depending on the user locale.
 class TranslationReferenceGenerator
     extends GeneratorForAnnotation<TranslationReferences> {
-  final ReferenceFileGenerator _generator;
-
-  TranslationReferenceGenerator(this._generator);
+  const TranslationReferenceGenerator();
 
   @override
   Future<String> generateForAnnotatedElement(
@@ -38,6 +38,13 @@ class TranslationReferenceGenerator
       );
     }
 
-    return _generator.generate(element, buildStep);
+    final config = Config.fromAnnotation(annotation);
+    final discoverer = LangFileDiscoverer(
+      dir: config.langDir,
+      isRecursive: config.shouldSearchRecursively,
+    );
+    final generator = ReferenceFileGenerator(discoverer);
+
+    return generator.generate(element, buildStep);
   }
 }

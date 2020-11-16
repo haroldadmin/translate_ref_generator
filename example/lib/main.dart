@@ -1,5 +1,10 @@
 import 'translations.lang.dart';
 
 void main(List<String> args) {
-  print('Keys: [${TranslationsExample.greeting}]');
+  const keys = [
+    TranslationsExample.greeting,
+    TranslationsExample.farewell,
+    TranslationsExample.goodbye
+  ];
+  print('Keys: ${keys.toString()}');
 }

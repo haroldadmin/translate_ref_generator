@@ -10,9 +10,20 @@
 /// ```
 /// import 'package:translate_ref_generator/translate_ref_generator.dart'
 ///
-/// @TranslationReferences()
+/// @TranslationReferences(
+///   langDir: 'lib/translations/',
+///   searchRecursively: false
+/// )
 /// class $MyTranslations {}
 /// ```
 class TranslationReferences {
-  const TranslationReferences();
+  final String langDir;
+  final bool searchRecursively;
+
+  const TranslationReferences({
+    this.langDir = _DefaultLangDir,
+    this.searchRecursively = false,
+  });
 }
+
+const _DefaultLangDir = 'lib/lang/';

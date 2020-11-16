@@ -11,7 +11,7 @@ import 'package:translate_ref_generator/src/translations_merger.dart';
 class ReferenceFileGenerator {
   final LangFileDiscoverer _discoverer;
 
-  ReferenceFileGenerator(this._discoverer);
+  const ReferenceFileGenerator(this._discoverer);
 
   Future<String> generate(Element element, BuildStep buildStep) async {
     final className = element.displayName.substring(1);
