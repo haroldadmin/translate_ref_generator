@@ -1,3 +1,3 @@
-## 1.0.0
+## 0.0.1
 
-- Initial version, created by Stagehand
+- First public release of `translate_ref_generator`
