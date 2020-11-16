@@ -1,12 +1,18 @@
 # Translation Reference Generator
 
-For a Flutter project that contains translation strings in JSON files, it can be a challenge to correctly reference string key names inside Dart code because:
+Dart code generator for keys in translation JSON files.
+
+For Flutter projects that contain translation strings in JSON files, it can be a challenge to correctly reference string key names inside Dart code because:
 
 - Key names might change over time as translations are added/removed
-- Spelling mistakes in key names can be hard to detect
-- Multiple language files contain strings of the same keys, but some files might contain extra/fewer keys
+- Spelling mistakes in key names can cause errors at runtime
+- Different translation files might contain extra/fewer keys than others
 
 This package aims to solve these problems by creating a Dart file at compile time which contains these key names as constants.
+
+## Usage
+
+Place your translation string files with `.lang.json` extension in the `lib/lang` directory.
 
 ```text
 # Project structure
@@ -15,36 +21,41 @@ This package aims to solve these problems by creating a Dart file at compile tim
     - lang
       - en.lang.json
       - hi.lang.json
-    - translations.dart
 ```
 
 ```json
-// en.json
+// Example en.json
 {
   "greeting": "hello"
 }
 
-// hi.lang.json
+// Example hi.lang.json
 {
   "greeting": "नमस्कार"
 }
 ```
 
+Create a class annotated with `@TranslationReferences` and prefix the name with the `$` sign.
+
 ```dart
-// translations.dart
-@TranslationsReference
+@TranslationsReference(
+  langDir: 'lib/lang',
+)
 class $MyTranslations {}
 ```
 
-This setup would generate a file `translations.lang.dart` containing:
+Finally, run `flutter pub run build_runner build` to run the code generator.
+
+The setup in this example would generate a file `translations.lang.dart` with the following contents:
 
 ```dart
+// Generated code
 class MyTranslations {
   static const String greeting = 'greeting';
 }
 ```
 
-Depending on your setup, this class can then be used inside your Flutter app:
+This class can then be used inside your Flutter app for localization:
 
 ```dart
 class MyWidget extends StatelessWidget {
@@ -55,3 +66,16 @@ class MyWidget extends StatelessWidget {
   }
 }
 ```
+
+## Status
+
+This package is not yet published to `pub.dev`. No guarantees are made regarding API stability. Use at your own risk.
+
+## Contributions
+
+Found a bug or have a feature request? Open an issue!
+Want to contribute new features or bug fixes? Open an issue and the create a Pull Request.
+
+## License
+
+`<TBD>`
