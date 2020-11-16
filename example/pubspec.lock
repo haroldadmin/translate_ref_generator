@@ -372,6 +372,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+2"
+  translate_ref:
+    dependency: "direct main"
+    description:
+      path: "../../translate_ref"
+      relative: true
+    source: path
+    version: "0.0.0"
   translate_ref_generator:
     dependency: "direct dev"
     description:

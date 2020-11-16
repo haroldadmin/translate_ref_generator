@@ -1,4 +1,4 @@
-import 'package:translate_ref_generator/translate_ref_generator.dart';
+import 'package:translate_ref/translate_ref.dart';
 
 @TranslationReferences(
   langDir: 'lib/lang',

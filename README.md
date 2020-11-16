@@ -1,6 +1,6 @@
 # Translation Reference Generator
 
-Dart code generator for keys in translation JSON files.
+Dart code generator for keys in translation JSON files. Companion annotation library: [`translate_ref`](https://github.com/haroldadmin/translate_ref).
 
 For Flutter projects that contain translation strings in JSON files, it can be a challenge to correctly reference string key names inside Dart code because:
 
@@ -9,6 +9,18 @@ For Flutter projects that contain translation strings in JSON files, it can be a
 - Different translation files might contain extra/fewer keys than others
 
 This package aims to solve these problems by creating a Dart file at compile time which contains these key names as constants.
+
+## Installation
+
+Add `translate_ref` as a dependency, and `translate_ref_generator` as a dev dependency:
+
+```yaml
+dependencies:
+  translate_ref: ^0.0.2
+
+dev_dependencies:
+  translate_ref_generator: ^0.0.2
+```
 
 ## Usage
 
@@ -35,9 +47,11 @@ Place your translation string files with `.lang.json` extension in the `lib/lang
 }
 ```
 
-Create a class annotated with `@TranslationReferences` and prefix the name with the `$` sign.
+Create a class annotated with `@TranslationReferences` (from `translate_ref` package) and prefix the name with the `$` sign.
 
 ```dart
+import 'package:translate_ref/translate_ref.dart';
+
 @TranslationsReference(
   langDir: 'lib/lang',
 )

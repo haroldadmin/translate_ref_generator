@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
-import 'package:translate_ref_generator/src/annotations.dart';
+import 'package:translate_ref/translate_ref.dart';
 import 'package:translate_ref_generator/src/config.dart';
 import 'package:translate_ref_generator/src/file_discoverer.dart';
 import 'package:translate_ref_generator/src/file_generator.dart';
