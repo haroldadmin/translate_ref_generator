@@ -11,7 +11,9 @@ dependencies:
   file: ^5.2.1
   source_gen: ^0.9.8
   translate_ref:
-    git: https://github.com/haroldadmin/translate_ref
+    git:
+      url: https://github.com/haroldadmin/translate_ref
+      ref: 0.0.2
 
 dev_dependencies:
   build_config: ^0.4.2

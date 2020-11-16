@@ -375,9 +375,11 @@ packages:
   translate_ref:
     dependency: "direct main"
     description:
-      path: "../../translate_ref"
-      relative: true
-    source: path
+      path: "."
+      ref: "0.0.2"
+      resolved-ref: "4b216bc28388e20361d8e5f53eb136bb8dee6d9f"
+      url: "https://github.com/haroldadmin/translate_ref"
+    source: git
     version: "0.0.2"
   translate_ref_generator:
     dependency: "direct dev"
